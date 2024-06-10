@@ -55,7 +55,3 @@ class TweetPreprocessor:
         word_tokens = [w for w in word_tokens if w]
 
         return word_tokens
-
-processor = TweetPreprocessor()
-
-processor.process_tweets(["This is https://www.google.de a Test #Tweet 🤨 Huhu and it is a Test, juju.","Yes it Test and Test, test."])
