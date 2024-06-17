@@ -20,8 +20,7 @@ class ContextualEmbeddings:
         embeddings = self.get_contextual_embeddings(tweet_texts)
         # Calculate the embedding similarities
         similarity_matrix = self.model.similarity(embeddings, embeddings)
-        similarity_matrix[similarity_matrix >= 0.99] = 0
-        similarity_matrix *= np.tri(*similarity_matrix.shape)
+        similarity_matrix *= np.tri(*similarity_matrix.shape, k=-1)
         print(similarity_matrix)
         return similarity_matrix
 
