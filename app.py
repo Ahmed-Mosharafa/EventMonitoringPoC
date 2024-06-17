@@ -1,7 +1,7 @@
 from flask import Flask
-from utils.Dataloader import Dataloader
-from utils.TweetPreprocessor import TweetPreprocessor
-from graph.ContextualKnowledge import ContextualEmbeddings
+from utils.dataloader import Dataloader
+from utils.tweet_preprocessor import TweetPreprocessor
+from graph.contextual_knowledge import ContextualEmbeddings
 
 import numpy as np
 
