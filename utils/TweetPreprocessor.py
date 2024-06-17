@@ -12,8 +12,8 @@ class TweetPreprocessor:
         for tweet in tweets:
             tweet['tokens'] = self.normalize_tweet(tweet['text'])
             if len(tweet['tokens']) > 0:
+                tweet['normalized'] = ' '.join(tweet['tokens'])
                 normalized_tweets.append(tweet)
-        print(normalized_tweets)
         return normalized_tweets
         #return window_making(normalized_tweets)
 
