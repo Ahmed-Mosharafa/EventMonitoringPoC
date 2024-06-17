@@ -23,7 +23,7 @@ for name, window in windows:
     tweets = preprocessor.process_tweets(tweets)
     
     contextual_similarity = contextual.get_similarity_matrix(tweets)
-    structural_similarity = contextual_similarity
+    structural_similarity = contextual_similarity #TODO: structual similarity
 
     graph_matrix = 0.5 * (contextual_similarity + structural_similarity)
     # Get highest scores
