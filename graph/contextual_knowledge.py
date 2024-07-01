@@ -1,8 +1,6 @@
 from sentence_transformers import SentenceTransformer
-
-from utils import TweetPreprocessor
-
 import numpy as np
+
 
 class ContextualEmbeddings:
 
