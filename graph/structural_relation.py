@@ -39,7 +39,7 @@ class StructuralRelation:
         hashtags_overlap = 0 
         if hashtag_flag :
             hashtags_overlap = self.overlap_measure(hashtag_tj,hashtag_ti)
-        named_entities_overlap = self.overlap_measure(self.named_entities(tj),self.named_entities(ti))
+        named_entities_overlap = self.overlap_measure(tj,ti)
         return (hashtag_flag_int*alpha*hashtags_overlap) + (beta*named_entities_overlap)
 
     def get_struct_relation_matrix(self,tweets):
@@ -49,12 +49,17 @@ class StructuralRelation:
         tweet_texts = [tweet['normalized'] for tweet in tweets]
         n = len(tweet_texts)
         relation_matrix = [[0 for _ in range(n)] for _ in range(n)]
+        
+        ner = []
+        for text in tweet_texts:
+            ner.append(self.named_entities(text))
+        
         for i in range(n):
             for j in range(i,n):
                 if i == j :
                     relation_matrix[i][j] = 1
                 else :
-                    value = self.struct_relation_calculation(tweet_texts[i],tweet_texts[j],None,None,0.0,1.0,False)
+                    value = self.struct_relation_calculation(ner[i],ner[j],None,None,0.0,1.0,False)
                     relation_matrix[i][j] = value
                     relation_matrix[j][i] = value
                 # print(j)
