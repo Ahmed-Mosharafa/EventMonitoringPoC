@@ -2,6 +2,8 @@ import networkx as nx
 import markov_clustering as mc
 import matplotlib.pyplot as plt
 
+from collections import Counter
+import numpy as np
 
 class MarkovClustering:
 
@@ -37,20 +39,44 @@ class MarkovClustering:
         return self.clusters
 
     def plot_clusters(self):
-
+        self.clusters.sort(key=len, reverse=True)
         # Output the clusters
         for i, cluster in enumerate(self.clusters):
             print(f"Cluster {i + 1}:")
             for node in cluster:
                 print(f"  - {self.similarity_graph.nodes[node]['tweet']}")
 
-        # Visualize the graph (optional)
-        pos = nx.spring_layout(self.similarity_graph)
-        nx.draw(self.similarity_graph, pos, with_labels=True,
-                labels=nx.get_node_attributes(self.similarity_graph, 'tweet'),
-                node_size=500, node_color='skyblue', font_size=10, font_color='black', font_weight='bold')
-        plt.show()
+    def evaluation(self):
+        evaluation_matrix = np.zeros((len(self.tweets), len(self.tweets)))
+        all_tweets = []
+        for i, cluster in enumerate(self.clusters):
+            for node in cluster:
+                all_tweets.append((self.similarity_graph.nodes[node]['tweet']['label'], i))
+        
+        for i, (t1l, t1p) in enumerate(all_tweets):
+            for j in range(i+1,len(all_tweets)):
+                # TP: 1, FN: 2, FP: 3, TN: 4
+                (t2l, t2p) = all_tweets[j]
+                score = 0
+                if t1l == t2l and t1p == t2p:
+                    score = 1
+                elif t1l == t2l and t1p != t2p:
+                    score = 2
+                elif t1l != t2l and t1p == t2p:
+                    score = 3
+                elif t1l != t2l and t1p != t2p:
+                    score = 4
+                evaluation_matrix[i][j] = score
 
+        unique, counts = np.unique(evaluation_matrix, return_counts=True)
+        evals = dict(zip(unique, counts))
+
+        precision = evals[1] / (evals[1] + evals[3])
+        recall = evals[1] / (evals[1] + evals[2])
+        fscore = 2 * (precision * recall) / (precision + recall)
+        print(f'precision: {precision}')
+        print(f'recall: {recall}')
+        print(f'fscore: {fscore}')
 
 # Test usage
 '''contextual = ContextualEmbeddings()

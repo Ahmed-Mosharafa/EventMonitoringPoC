@@ -19,7 +19,7 @@ structural = StructuralRelation()
 #def fetch_events():
 
 data = dataloader.events2012()
-windows = dataloader.window_making(2880, data)
+windows = dataloader.window_making(1440, data)
 
 for name, window in windows:
     tweets = window.to_dict('records')
@@ -35,6 +35,8 @@ for name, window in windows:
     mcl = MarkovClustering(graph_matrix, tweets)
     mcl.apply_mcl_algorithm()
     mcl.plot_clusters()
+
+    mcl.evaluation2()
 
     break
 
