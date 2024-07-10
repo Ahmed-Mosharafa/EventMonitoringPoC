@@ -9,7 +9,7 @@ from summary.event_summary import EventSummarizer
 
 import numpy as np
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 dataloader = Dataloader()
 preprocessor = TweetPreprocessor()
@@ -40,9 +40,11 @@ for name, window in windows:
     # Event Summaries
     summarizer = EventSummarizer(clusters, tweets)
     cluster_summaries = summarizer.generate_summary(clusters, tweets)
-    print(cluster_summaries)
-    # cluster_topics = summarizer.get_tweet_topics(clusters, tweets)
-    # print(cluster_topics)
+
+    for cluster_summary in cluster_summaries:
+        print("Cluster_id: ", cluster_summary['cluster_id'], "Cluster_summary: ", cluster_summary['summary'])
+
+    cluster_topics = summarizer.get_tweet_topics(clusters, tweets)
 
     #mcl.evaluation2()
 

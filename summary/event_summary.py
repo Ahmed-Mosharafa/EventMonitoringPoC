@@ -12,17 +12,6 @@ class EventSummarizer:
     def __init__(self, clusters, tweets):
         self.tweet_preprocessor = TweetPreprocessor()
 
-    def extract_named_entities(self, tweets):
-        # Load spaCy English model
-        nlp = spacy.load("en_core_web_sm")
-
-        named_entities = []
-        for tweet in tweets:
-            doc = nlp(tweet)
-            entities = [ent.text for ent in doc.ents]
-            named_entities.append(' '.join(entities))
-        return named_entities
-
     def get_top_words(self, clusters, tweets, top_n=7, ngram_range=(1, 3)):
         # Summarize topics for each cluster
         clusters_top_words = []
@@ -30,9 +19,6 @@ class EventSummarizer:
         for i, cluster in enumerate(clusters):
             # Extract tweets in the cluster
             cluster_tweets = [tweets[node]['normalized'] for node in cluster]
-
-            # Extract named entities from the tweets
-            cluster_entities = self.extract_named_entities(cluster_tweets)
 
             # Create a term-document matrix
             vectorizer = CountVectorizer(stop_words='english', ngram_range=ngram_range)
