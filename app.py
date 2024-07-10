@@ -1,14 +1,15 @@
 from flask import Flask
 
-from utils.dataloader import Dataloader
+from utils.Dataloader import Dataloader
 from utils.tweet_preprocessor import TweetPreprocessor
 from graph.contextual_knowledge import ContextualEmbeddings
 from graph.structural_relation import StructuralRelation
 from clustering.mcl_clustering import MarkovClustering
+from summary.event_summary import EventSummarizer
 
 import numpy as np
 
-#app = Flask(__name__)
+app = Flask(__name__)
 
 dataloader = Dataloader()
 preprocessor = TweetPreprocessor()
@@ -33,10 +34,17 @@ for name, window in windows:
 
     # Markov Clustering
     mcl = MarkovClustering(graph_matrix, tweets)
-    mcl.apply_mcl_algorithm()
-    mcl.plot_clusters()
+    clusters = mcl.apply_mcl_algorithm()
+    # mcl.plot_clusters()
 
-    mcl.evaluation2()
+    # Event Summaries
+    summarizer = EventSummarizer(clusters, tweets)
+    cluster_summaries = summarizer.generate_summary(clusters, tweets)
+    print(cluster_summaries)
+    # cluster_topics = summarizer.get_tweet_topics(clusters, tweets)
+    # print(cluster_topics)
+
+    #mcl.evaluation2()
 
     break
 
