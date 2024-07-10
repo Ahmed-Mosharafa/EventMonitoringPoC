@@ -4,6 +4,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, AutoModelForSeque
 from utils.tweet_preprocessor import TweetPreprocessor
 import numpy as np
 from scipy.special import softmax
+import matplotlib.pyplot as plt
 
 
 class EventSummarizer:
@@ -90,6 +91,8 @@ class EventSummarizer:
 
         topics = []
 
+        topic_counts = [0 for element in range(6)]
+
         for i, cluster in enumerate(clusters):
 
             # Extract tweets in the cluster
@@ -103,10 +106,14 @@ class EventSummarizer:
                 scores = output[0][0].detach().numpy()
                 scores = softmax(scores)
                 topic_index = np.argmax(scores)
+                topic_counts[topic_index] = cluster_topics[topic_index] + 1
                 cluster_topics[topic_index] = cluster_topics[topic_index] + 1
 
             cluster_topic = np.argmax(cluster_topics)
             topics.append({'cluster_id': i + 1, 'topic': topic_list[cluster_topic]})
             # print(f"Cluster {i + 1} Topic: {topic_list[cluster_topic]}\n")
+
+        plt.pie(topic_counts, labels=topic_list)
+        plt.show()
 
         return topics
