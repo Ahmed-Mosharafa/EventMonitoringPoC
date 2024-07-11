@@ -18,11 +18,9 @@ class ContextualEmbeddings:
         embeddings = self.get_contextual_embeddings(tweet_texts)
         # Calculate the embedding similarities
         similarity_matrix = self.model.similarity(embeddings, embeddings)
-        print(similarity_matrix)
         return similarity_matrix
 
     def get_similarities(self, embedding1, embedding2):
         # Calculate the embedding similarities
         similarities = self.model.similarity(embedding1, embedding2)
-        print("Similarities:", similarities)
         return similarities

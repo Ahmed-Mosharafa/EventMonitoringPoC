@@ -32,17 +32,12 @@ class TweetPreprocessor:
         if len(word_tokens) < 3:
             return []
 
-        #remove stop words
-        #nltk.download('stopwords')
         try:
-            _create_unverified_https_context = ssl._create_unverified_context
-        except AttributeError:
-            pass
-        else:
-            ssl._create_default_https_context = _create_unverified_https_context
-
-        nltk.download('stopwords')
-        stop_words = set(stopwords.words('english'))
+            stop_words = set(stopwords.words('english'))
+        except:
+            nltk.download('stopwords')
+            stop_words = set(stopwords.words('english'))
+        
         word_tokens = [w for w in word_tokens if not w in stop_words]
 
         #remove web-lins

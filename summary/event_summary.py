@@ -34,7 +34,8 @@ class EventSummarizer:
             # Save the cluster summary
             cluster_top_words = {
                 'cluster_id': i + 1,
-                'top_words': top_words
+                'top_words': top_words,
+                'length': len(cluster)
             }
             clusters_top_words.append(cluster_top_words)
 
@@ -58,7 +59,8 @@ class EventSummarizer:
 
             cluster_summary = {
                 'cluster_id': cluster_top_words['cluster_id'],
-                'summary': summary
+                'summary': summary,
+                'length': cluster_top_words['length']
             }
             cluster_summaries.append(cluster_summary)
 
@@ -97,7 +99,6 @@ class EventSummarizer:
 
             cluster_topic = np.argmax(cluster_topics)
             topics.append({'cluster_id': i + 1, 'topic': topic_list[cluster_topic]})
-            # print(f"Cluster {i + 1} Topic: {topic_list[cluster_topic]}\n")
 
         plt.pie(topic_counts, labels=topic_list)
         plt.show()

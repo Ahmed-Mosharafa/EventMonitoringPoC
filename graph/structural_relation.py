@@ -12,25 +12,14 @@ class StructuralRelation:
         
     def named_entities(self,text:str):
         text_nlp = self.nlp(text)
-        # print(text_nlp)
-        # names_entities = text_nlp.ents
-        # print([(X.text, X.label_) for X in doc.ents])
-        # print(text_nlp.ents)
         entities_text = [ent.text for ent in text_nlp.ents]
-        # NE_list = list(text_nlp.ents.text)
         return entities_text
     
     def overlap_measure(self,tj:list,ti:list):
         intersection = list(set((tj)).intersection(set((ti))))
-        # intersection = list(set(tj) & set(ti))
         union = set(tj + ti)
         if len(union) == 0:
-            return 0 
-        # print(tj)
-        # print((ti))
-        # print(len(intersection))
-        # print(len(union))
-        # print(len(intersection)/len(union) )
+            return 0
         return len(intersection)/len(union)      
 
     def struct_relation_calculation(self,tj:str,ti:str,hashtag_ti:list,hashtag_tj:list,alpha:int,beta:int,hashtag_flag:bool):
@@ -43,8 +32,6 @@ class StructuralRelation:
         return (hashtag_flag_int*alpha*hashtags_overlap) + (beta*named_entities_overlap)
 
     def get_struct_relation_matrix(self,tweets):
-        # tweet_texts = [tweet['normalized'] for tweet in tweets]
-        # embeddings = self.get_contextual_embeddings(tweet_texts)
         # Calculate the embedding similarities
         tweet_texts = [tweet['normalized'] for tweet in tweets]
         n = len(tweet_texts)
@@ -64,12 +51,3 @@ class StructuralRelation:
                     relation_matrix[j][i] = value
                 # print(j)
         return np.array(relation_matrix)
-    
-# struc = StructuralRelation()
-# tweets = ["Alice walked through Central Park and enjoyed the fresh air","lice met John in Central Park and felt the cool breeze"
-#           ,"John and Alice strolled by the River Thames and admired the serene view"]
-# x = struc.get_struct_relation_matrix(tweets)
-# # x = struc.overlap_measure(["x","haha"],["y","x"])
-# print(x)
-
-

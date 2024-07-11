@@ -7,7 +7,7 @@ import numpy as np
 
 class MarkovClustering:
 
-    def __init__(self, graph_matrix, tweets, threshold=0.5):
+    def __init__(self, graph_matrix, tweets, threshold=0.29):
         self.graph_matrix = graph_matrix
         self.tweets = tweets
         self.threshold = threshold
@@ -36,10 +36,10 @@ class MarkovClustering:
         # Apply the Markov Clustering Algorithm
         result = mc.run_mcl(adjacency_matrix)  # run MCL with default parameters
         self.clusters = mc.get_clusters(result)  # get the clusters
+        self.clusters.sort(key=len, reverse=True)
         return self.clusters
 
     def plot_clusters(self):
-        self.clusters.sort(key=len, reverse=True)
         # Output the clusters
         for i, cluster in enumerate(self.clusters):
             print(f"Cluster {i + 1}:")
