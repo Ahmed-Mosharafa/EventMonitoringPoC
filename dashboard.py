@@ -8,7 +8,7 @@ import math
 import numpy as np
 st.set_page_config(layout="wide")
 from sklearn import preprocessing as sp
-
+import heapq
 
 # Example query with similarity to topic titles
 query = "Various notable events and achievements involving \n public figures, entertainment, and current affairs."
@@ -48,8 +48,9 @@ for vector in vectors:
     similarity = cosine_similarity(vector, vectors[0])[0][0]
     sim.append(similarity)
 # transformed = [s ** 3 for s in sim]
+
 min_value = min(sim)
-max_value=  0.85
+max_value=  heapq.nlargest(2, sim)[-1]
 # st.write(min_value)
 # st.write(max_value)
 
