@@ -10,3 +10,6 @@ class Dataloader:
     def window_making(self, window_size, df):
         time_windows = df.groupby(pd.Grouper(key='created_at', freq=f'{window_size}Min'))
         return time_windows
+
+    # def to_csv_helper(self,df):
+    #     return df.to_csv("test.csv")

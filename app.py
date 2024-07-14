@@ -1,9 +1,10 @@
-from utils.dataloader import Dataloader
+from utils.Dataloader import Dataloader
 from utils.tweet_preprocessor import TweetPreprocessor
 from graph.contextual_knowledge import ContextualEmbeddings
 from graph.structural_relation import StructuralRelation
 from clustering.mcl_clustering import MarkovClustering
 from summary.event_summary import EventSummarizer
+import json
 
 import numpy as np
 
@@ -35,6 +36,9 @@ for name, window in windows:
     cluster_summaries = summarizer.generate_summary(clusters, tweets)
 
     print(cluster_summaries)
+    # dataloader.to_csv_helper(cluster_summaries)
+    with open('test_file', 'w') as f_out:
+        json.dump(cluster_summaries, f_out)
 
     break
  
