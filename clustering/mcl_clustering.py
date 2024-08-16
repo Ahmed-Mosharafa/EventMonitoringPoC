@@ -6,8 +6,16 @@ from collections import Counter
 import numpy as np
 
 class MarkovClustering:
-
+    '''
+    Class for performing Markov Clustering on a similarity graph derived from tweets.
+    It includes methods to apply the clustering algorithm, plot clusters, and evaluate the results.
+    '''
     def __init__(self, graph_matrix, tweets, threshold=0.29):
+        '''
+        Initializes the MarkovClustering class with the graph matrix, tweets, and a threshold.
+
+        (graph_matrix: np.ndarray, tweets: list of dict, threshold: float) -> None
+        '''
         self.graph_matrix = graph_matrix
         self.tweets = tweets
         self.threshold = threshold
@@ -15,7 +23,12 @@ class MarkovClustering:
         self.clusters = None
 
     def apply_mcl_algorithm(self):
+        '''
+        Applies the Markov Clustering Algorithm on the similarity graph.
 
+        () -> list of list of int
+        A list of clusters, where each cluster is a list of node indices representing the tweets.
+        '''
         # Create a similarity graph
         similarity_graph = nx.Graph()
         matrix_length = len(self.tweets)
@@ -40,6 +53,11 @@ class MarkovClustering:
         return self.clusters
 
     def plot_clusters(self):
+        '''
+        Plots the clusters by printing each cluster's tweets to the console.
+
+        () -> None
+        '''
         # Output the clusters
         for i, cluster in enumerate(self.clusters):
             print(f"Cluster {i + 1}:")
@@ -47,6 +65,12 @@ class MarkovClustering:
                 print(f"  - {self.similarity_graph.nodes[node]['tweet']}")
 
     def evaluation(self):
+        '''
+        Evaluates the clustering by calculating precision, recall, and F-score.
+
+        () -> None
+        Prints the precision, recall, and F-score of the clustering.
+        '''
         evaluation_matrix = np.zeros((len(self.tweets), len(self.tweets)))
         all_tweets = []
         for i, cluster in enumerate(self.clusters):
