@@ -8,11 +8,28 @@ import matplotlib.pyplot as plt
 
 
 class EventSummarizer:
+    '''
+    Class for summarizing events based on tweet clusters. It includes methods
+    for extracting top words from clusters, generating cluster summaries, and
+    identifying the main topics of tweet clusters.
+    '''
 
     def __init__(self, clusters, tweets):
+        '''
+        Initializes the EventSummarizer class with a TweetPreprocessor instance.
+
+        (clusters: list, tweets: list of dict) -> None
+        '''
         self.tweet_preprocessor = TweetPreprocessor()
 
     def get_top_words(self, clusters, tweets, top_n=7, ngram_range=(1, 3)):
+        '''
+        Extracts the top words from each tweet cluster using a term-document matrix.
+
+        (clusters: list, tweets: list of dict, top_n: int, ngram_range: tuple) -> list of dict
+        A list of dictionaries, each containing the top words for a cluster,
+        the cluster ID, and the number of tweets in the cluster.
+        '''
         # Summarize topics for each cluster
         clusters_top_words = []
 
@@ -42,7 +59,13 @@ class EventSummarizer:
         return clusters_top_words
 
     def generate_summary(self, clusters, tweets):
+        '''
+        Extracts the top words from each tweet cluster using a term-document matrix.
 
+        (clusters: list, tweets: list of dict, top_n: int, ngram_range: tuple) -> list of dict
+        A list of dictionaries, each containing the top words for a cluster,
+        the cluster ID, and the number of tweets in the cluster.
+        '''
         tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-base")
         model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")
 
@@ -67,7 +90,13 @@ class EventSummarizer:
         return cluster_summaries
 
     def get_tweet_topics(self, clusters, tweets):
+        '''
+        Identifies the main topic of each tweet cluster using a topic classification model.
 
+        (clusters: list, tweets: list of dict) -> list of dict
+        A list of dictionaries, each containing the main topic for a cluster
+        and the cluster ID. A pie chart of topic distribution is also displayed.
+        '''
         topic_model = f"cardiffnlp/tweet-topic-latest-single"
         tokenizer = AutoTokenizer.from_pretrained(topic_model)
 
