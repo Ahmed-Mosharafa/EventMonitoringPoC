@@ -8,8 +8,19 @@ import ssl
 
 
 class TweetPreprocessor:
+    """
+    A class used to preprocess tweets by normalizing text, removing stop words,
+    punctuation, URLs, and other undesired elements.
+    """
+
 
     def process_tweets(self, tweets):
+        """
+        Processes a list of tweets by normalizing each tweet's text and filtering out
+        tweets with less than three tokens.
+
+        (tweets : list of dict)  ->  list of dict   A list of normalized tweets with additional 'tokens' and 'normalized'fields.
+        """
         normalized_tweets = []
         for tweet in tweets:
             tweet['tokens'] = self.normalize_tweet(tweet['text'])
@@ -20,6 +31,12 @@ class TweetPreprocessor:
         #return window_making(normalized_tweets)
 
     def normalize_tweet(self, tweet):
+        """
+        Normalizes a single tweet by converting to lowercase, tokenizing, removing
+        stop words, URLs, punctuation, non-ASCII characters, and empty tokens.
+
+        (tweet : str) -> list A list of normalized tokens from the tweet.
+        """
 
         tokenizer = TweetTokenizer()
         #make tweet lower case
