@@ -74,7 +74,7 @@ class EventSummarizer:
 
         for cluster_top_words in clusters_top_words:
             prompt = "I have a cluster summary described by the following keywords: " + str(
-                cluster_top_words['top_words']) + ". Based on the previous keywords, what is the cluster summary?"
+                cluster_top_words['top_words']) + ". Based on the previous keywords, what is the cluster title ?"
 
             input_ids = tokenizer(prompt, return_tensors="pt").input_ids
             outputs = model.generate(input_ids, max_new_tokens=30)

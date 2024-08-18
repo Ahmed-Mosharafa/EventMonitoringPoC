@@ -5,3 +5,8 @@ spacy
 python3 -m spacy download en_core_web_sm
 networkx
 markov_clustering
+sent2vec
+matplotlib
+scikit-learn 
+scipy
+streamlit
