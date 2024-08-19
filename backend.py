@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from utils.tweet_preprocessor import TweetPreprocessor
 from graph.contextual_knowledge import ContextualEmbeddings
 from graph.structural_relation import StructuralRelation
@@ -6,6 +7,7 @@ from clustering.mcl_clustering import MarkovClustering
 from summary.event_summary import EventSummarizer
 
 app = Flask(__name__)
+CORS(app)
 
 # Beispieltext, der an Streamlit gesendet wird
 current_events = []
