@@ -69,7 +69,9 @@ This is the interface of the application where users can view with the clusters.
 
 ### **Running the Application**
 
-## **Run with Automated Journalist**
+#### **Run with Automated Journalist**
+Make sure to run Automated Journalist on feature branch 'event-detection'.
+
 To run the backend, execute the following command in your terminal:
 ```bash
 python backend.py
@@ -82,7 +84,7 @@ streamlit run frontend.py
 
 This will launch the Backend Server and the Streamlit application in your web browser, where you can explore the tweet clusters and their associated topics in combination with Automated Journalist App.
 
-## **Run Experimental with Event2012 Dataset**
+#### **Run Experimental with Event2012 Dataset**
 To run, execute the following command in your terminal:
 ```bash
 python app.py
