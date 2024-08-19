@@ -1,0 +1,17 @@
+\section{Related Work}
+Event detection on social media platforms, particularly Twitter, has been extensively studied using various approaches, including clustering-based, BERT-based, and graph-based methods. Each of these methodologies offers unique strengths in addressing the challenges of real-time event detection from noisy and unstructured social media data.
+
+\subsection{Clustering-Based Event Detection}
+\label{sec:clusteringbased}
+Clustering methods have been widely used for real-time event detection, where tweets are grouped based on their similarities. \citet{becker2011beyond} proposed a model that represents each post as a tf-idf weight vector and applies an incremental clustering algorithm to identify event-related clusters, achieving an F1-score of 0.837 on their dataset. \citet{li2017real} introduced a method that clusters tweets first by retweets and links, then by embeddings on semantic classes, using cosine similarity and tf-idf as similarity measures. \citet{kolajo2022real} developed the Social Media Analysis Framework for Event Detection (SMAFED), which employed histogram-based incremental clustering (SHC) on the Event2012 Twitter dataset. 
+
+\subsection{Graph-Based Event Detection}
+\label{sec:graphbased}
+Graph-based methods are another prominent approach, where tweets are represented as nodes in a graph, and edges indicate relationships or similarities, such as shared hashtags or keywords. The graph is then clustered using clustering algorithms such as the Louvain method or spectral clustering to identify event-related clusters. \citet{graphclus} proposed a graph-based method for real-time event detection from Twitter. In their method, tweets are vectorized using tf-idf formula. A tweet graph is constructed, where nodes represent tweet vectors and edges between nodes represent the cosine similarity between two tweet vectors. Then, the well-known MCL algorithm is applied to identify events. \citet{singh2024event} utilized the Louvain community detection algorithm on a graph representation of keywords extracted from tweets, achieving an F1-score of 0.84.
+
+\subsection{BERT-Based Event Detection}
+\label{sec:bertbased}
+The application of BERT (Bidirectional Encoder Representations from Transformers) \cite{bert} in event detection has gained traction due to its ability to capture deep contextual information from text. \citet{bertweet} developed BERTweet, a pre-trained language model specifically designed for English tweets, which significantly improved performance on various tweet-based NLP tasks.  \citet{edtbert} proposed EDT\textsubscript{BERT}, a model that combines structural and contextual information to represent tweets as nodes in a graph, employing the Markov Clustering Algorithm (MCL) \cite{mcl} to identify event clusters. \citet{eventbert} introduced EventBert, a pre-trained model designed for event correlation reasoning, further enhancing the understanding of event sequences in natural language texts.
+
+
+These approaches highlight the diversity of techniques employed in event detection from social media, each contributing valuable insights and methodologies to the field. Our work builds on these foundations, integrating elements from BERT-based and graph-based methods to develop a robust system for real-time event detection and summarization.

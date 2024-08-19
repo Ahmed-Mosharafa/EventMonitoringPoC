@@ -1,0 +1,84 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX, which is strongly recommended.
+\pdfoutput=1
+% In particular, the hyperref package requires pdfLaTeX in order to break URLs across lines.
+
+\documentclass[11pt]{article}
+
+% Remove the "review" option to generate the final version.
+\usepackage[final]{ACL2023}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+
+% This is not strictly necessary, and may be commented out.
+% However, it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{Social Media Monitoring}
+
+\author{Aysenur Kocak \\
+  Technical University \\ of Munich \\
+  \texttt{aysenur.kocak@tum.de} \\\And
+  Youssef Lotfy \\
+  Technical University \\ of Munich \\
+  \texttt{ge92zaq@mytum.de} \\\And
+  Leonhard Stengel \\
+  Technical University \\ of Munich \\
+  \texttt{leonhard.stengel@tum.de} \\}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Event detection on social media platforms, particularly Twitter (now known as X), is critical for fields like journalism, public safety, and crisis management. This project implements a social media monitoring module within the Automated Journalist App to automatically detect and cluster relevant events with minimal human intervention. Leveraging key components of the EDT\textsubscript{BERT} model by \citet{edtbert}, we represent tweets as nodes in a graph, using structural and contextual similarities to identify clusters with the Markov Clustering (MCL) method. We then summarize these clusters using Google's FLAN-T5 model, producing concise summaries for seamless news integration. Our system achieves a precision of 85\%, a recall of 70\%, and an F1-score of 77\% on the Event2012 dataset, highlighting its effectiveness in real-time social media monitoring and its contribution to automated journalism.
+\end{abstract}
+
+% INTRODUCTION
+\input{introduction}
+
+% RELATED WORK
+\input{related_work}
+
+% METHODOLOGY
+\input{methodology}
+
+% EXPERIMENTS
+\input{experiments}
+
+% RESULTS & DISCUSSIONS
+\input{results_and_discussions}
+
+% CONCLUSION
+\input{conclusion}
+
+% REFERENCES
+\bibliography{bibliography}
+\bibliographystyle{acl_natbib}
+
+% APPENDIX (OPTINAL)
+
+\end{document}
